@@ -1,13 +1,17 @@
 import "./HomePage.css";
 import Header from "./Commun/Header";
-import { products } from "../../data/products";
+//import { products } from "../../data/products";
+import axios from "axios";
+import { useEffect, useState } from "react";
 export default function HomePage() {
-    fetch('http://localhost:3000/api/products')
-    .then((response)=>{
-        return response.json()
-        }).then((data)=>{
-            console.log(data)
-    });
+    const [products,setProduct]=useState([])
+    useEffect(()=>{
+               axios.get('http://localhost:3000/api/products')
+               .then((response)=>{
+                //console.log(response.data)
+                setProduct(response.data)
+              })
+    },[])
   return (
     
     <>
