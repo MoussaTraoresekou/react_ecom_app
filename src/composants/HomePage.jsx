@@ -4,19 +4,25 @@ import Header from "./Commun/Header";
 import axios from "axios";
 import { useEffect, useState } from "react";
 export default function HomePage() {
+    const [cart_items,setCar_items]=useState([])
     const [products,setProduct]=useState([])
     useEffect(()=>{
                axios.get('http://localhost:3000/api/products')
                .then((response)=>{
                 //console.log(response.data)
                 setProduct(response.data)
+              });
+              axios.get('http://localhost:3000/api/cart-items')
+              .then((response)=>{
+                setCar_items(response.data)
+                  //console.log(response.data)
               })
     },[])
   return (
     
     <>
       
-      <Header />
+      <Header cart_items={cart_items}/>
       <div className="home-page">
         <div className="products-grid">
           {products.map((produit) => {
