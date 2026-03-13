@@ -13,8 +13,6 @@ function App() {
                       <Route path='checkout' element={<CheckoutPage/>}/>
                       <Route path='order' element={<OrderPage/>}/>
                       <Route path='tracking' element={<TrackingPage/>}/>
-
-
               </Routes>
     </>
   )
