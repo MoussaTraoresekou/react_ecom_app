@@ -3,26 +3,18 @@ import Header from "./Commun/Header";
 //import { products } from "../../data/products";
 import axios from "axios";
 import { useEffect, useState } from "react";
-export default function HomePage() {
-    const [cart_items,setCar_items]=useState([])
-    const [products,setProduct]=useState([])
-    useEffect(()=>{
-               axios.get('/api/products')
-               .then((response)=>{
-                //console.log(response.data)
-                setProduct(response.data)
-              });
-              axios.get('/api/cart-items')
-              .then((response)=>{
-                setCar_items(response.data)
-                  //console.log(response.data)
-              })
-    },[])
+import MoneyFormat from "./Commun/MoneyFormat";
+export default function HomePage({ cart_items }) {
+  const [products, setProduct] = useState([]);
+  useEffect(() => {
+    axios.get("/api/products").then((response) => {
+      //console.log(response.data)
+      setProduct(response.data);
+    });
+  }, []);
   return (
-    
     <>
-      
-      <Header cart_items={cart_items}/>
+      <Header cart_items={cart_items} />
       <div className="home-page">
         <div className="products-grid">
           {products.map((produit) => {
@@ -47,7 +39,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="product-price">
-                  {(produit.priceCents / 100).toFixed(2)}
+                  {MoneyFormat(produit.priceCents)}
                 </div>
 
                 <div className="product-quantity-container">
